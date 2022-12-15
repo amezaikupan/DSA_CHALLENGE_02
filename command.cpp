@@ -5,9 +5,9 @@
 using namespace std;
 
 int OutputInfo(char* output_info){
-    if(strcmp(output_info, "-t")) return 0;
-    if(strcmp(output_info, "-n")) return 1;
-    if(strcmp(output_info, "-ind")) return 2;
+    if(strcmp(output_info, "-t") == 0) return 0;
+    if(strcmp(output_info, "-n") == 0) return 1;
+    if(strcmp(output_info, "-ind") == 0) return 2;
     else{
         cout << "INVALID OUTPUT INFO" << endl;
         return -1;
@@ -17,21 +17,24 @@ int OutputInfo(char* output_info){
 void Command(char* algorithm, char* input_path, char* output_path, char* output_info){
     int output_info_code = OutputInfo(output_info);
 
-    if(output_info_code == 1) return;
+    if(output_info_code == -1) return;    
 
-    if(strcmp(algorithm, "-bf")){
-        BruceForeAlgorithm(input_path, output_path, output_info_code);
+    if(strcmp(algorithm, "-bf") == 0){
+        // BruceForeAlgorithm(input_path, output_path, output_info_code);
     }
-    else if(strcmp(algorithm, "-rk")){
-        RabinKarpAlgorithm(input_path, output_path, output_info_code);
+    else if(strcmp(algorithm, "-rk") == 0){
+        // RabinKarpAlgorithm(input_path, output_path, output_info_code);
     }
-    else if(strcmp(algorithm, "-kmp")){
-        KnuthMorrisPrattAlgorithm(input_path, output_path, output_info_code);
+    else if(strcmp(algorithm, "-kmp") == 0){
+        // KnuthMorrisPrattAlgorithm(input_path, output_path, output_info_code);
     }
-    else if(strcmp(algorithm, "-bm")){
+    else if(strcmp(algorithm, "-bm") == 0){
+        cout << "Algorithm: Boyer Moore Algorithm" << endl;
+        cout << "Input path: " << input_path << endl;
+        cout << "Output Path: " << output_path << endl;
         BoyerMooreAlgorithm(input_path, output_path, output_info_code);
     }
-    else if(strcmp(algorithm, "-tw")){
-        TwoWayAlgorithm(input_path, output_path, output_info_code);
+    else if(strcmp(algorithm, "-tw") == 0){
+        // TwoWayAlgorithm(input_path, output_path, output_info_code);
     }
 }

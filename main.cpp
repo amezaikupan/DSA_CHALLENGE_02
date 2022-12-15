@@ -1,9 +1,11 @@
 #include <iostream>
-#include <command.h>
+#include "command.h"
+#include "algorithms.h"
 
 using namespace std;
 
 int main(int argc, char** argv){
+    
     if(argc != 5){
         cout << "INVALID INPUT" << endl;
     }else{
