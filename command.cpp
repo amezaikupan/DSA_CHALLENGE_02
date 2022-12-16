@@ -20,13 +20,22 @@ void Command(char* algorithm, char* input_path, char* output_path, char* output_
     if(output_info_code == -1) return;    
 
     if(strcmp(algorithm, "-bf") == 0){
-        // BruceForeAlgorithm(input_path, output_path, output_info_code);
+        cout << "Algorithm: Bruce Force" << endl;
+        cout << "Input path: " << input_path << endl;
+        cout << "Output Path: " << output_path << endl;
+        BruceForceAlgorithm(input_path, output_path, output_info_code);
     }
     else if(strcmp(algorithm, "-rk") == 0){
-        // RabinKarpAlgorithm(input_path, output_path, output_info_code);
+        cout << "Algorithm: Rabin Karp" << endl;
+        cout << "Input path: " << input_path << endl;
+        cout << "Output Path: " << output_path << endl;
+        RabinKarpAlgorithm(input_path, output_path, output_info_code);
     }
     else if(strcmp(algorithm, "-kmp") == 0){
-        // KnuthMorrisPrattAlgorithm(input_path, output_path, output_info_code);
+        cout << "Algorithm: Knuth Morris Pratt" << endl;
+        cout << "Input path: " << input_path << endl;
+        cout << "Output Path: " << output_path << endl;
+        KMPAlgorithm(input_path, output_path, output_info_code);
     }
     else if(strcmp(algorithm, "-bm") == 0){
         cout << "Algorithm: Boyer Moore Algorithm" << endl;

@@ -8,8 +8,9 @@
 
 //Cai parameter la minh doan thoi nha.
 //A voi output info minh doi qua int cho de so sanh
-// void BruceForeAlgorithm(char* input_path, char* output_path, int output_info);
-// void RabinKarpAlgorithm(char* input_path, char* output_path, int output_info);
-// void KnuthMorrisPrattAlgorithm(char* input_path, char* output_path, int output_info);
+
+void BruceForceAlgorithm(char* input_path, char* output_path, int output_info);
+void RabinKarpAlgorithm(char* input_path, char* output_path, int output_info);
+void KMPAlgorithm(char* input_path, char* output_path, int output_info);
 void BoyerMooreAlgorithm(char* input_path, char* output_path, int output_info);
 // void TwoWayAlgorithm(char* input_path, char* output_path, int output_info);

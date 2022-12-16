@@ -131,7 +131,7 @@ double BoyerMooreAlgorithmTime(char* input_path, char* output_path){
     fout.close();
 
     auto end = chrono::high_resolution_clock::now();
-	double time = double(chrono::duration_cast <chrono::nanoseconds> (end - start).count()) / 1e6;
+	double time = double(chrono::duration_cast <chrono::nanoseconds> (end - start).count()) / 1e6 ;
 
     return time;
 }
