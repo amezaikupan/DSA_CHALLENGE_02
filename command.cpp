@@ -44,6 +44,6 @@ void Command(char* algorithm, char* input_path, char* output_path, char* output_
         BoyerMooreAlgorithm(input_path, output_path, output_info_code);
     }
     else if(strcmp(algorithm, "-tw") == 0){
-        // TwoWayAlgorithm(input_path, output_path, output_info_code);
+        TwoWayAlgorithm(input_path, output_path, output_info_code);
     }
 }

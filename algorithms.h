@@ -13,4 +13,4 @@ void BruceForceAlgorithm(char* input_path, char* output_path, int output_info);
 void RabinKarpAlgorithm(char* input_path, char* output_path, int output_info);
 void KMPAlgorithm(char* input_path, char* output_path, int output_info);
 void BoyerMooreAlgorithm(char* input_path, char* output_path, int output_info);
-// void TwoWayAlgorithm(char* input_path, char* output_path, int output_info);
+void TwoWayAlgorithm(char* input_path, char* output_path, int output_info);
