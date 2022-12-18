@@ -12,6 +12,11 @@ using namespace std;
 void BoyerMooreAlgorithm(char* input_path, char* output_path, int output_info){
     ifstream fin (input_path);
 
+    if(!fin.is_open()){
+        cout << "Khong mo duoc file" << endl;
+        return;
+    }
+
     string pattern, txt;
     fin >> pattern >> txt;
 
@@ -59,9 +64,6 @@ void BoyerMooreAlgorithm(char* input_path, char* output_path, int output_info){
         }
     }
 
-    auto end = chrono::high_resolution_clock::now();
-	double time = double(chrono::duration_cast <chrono::nanoseconds> (end - start).count()) / 1e6 ;
-
     fin.close();
     
     ofstream fout (output_path);
@@ -71,6 +73,9 @@ void BoyerMooreAlgorithm(char* input_path, char* output_path, int output_info){
     }
 
     fout.close();
+    
+    auto end = chrono::high_resolution_clock::now();
+	double time = double(chrono::duration_cast <chrono::nanoseconds> (end - start).count()) / 1e6 ;
 
     if(output_info == 0){
         cout << "Time: " << time << endl;

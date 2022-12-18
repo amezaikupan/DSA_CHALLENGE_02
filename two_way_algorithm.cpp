@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <chrono>
 #include <string.h>
 #define MAX(a, b) (((a) > (b)) ? (a): (b))
 
@@ -80,49 +80,98 @@ int twoWayMatch(char *T, char *P, FILE *fp1)
     int n = strlen(T);
     int m = strlen(P);
 
-    comparisionCount += criticalFactor(T, &p, &l);
+    comparisionCount += criticalFactor(P, &p, &l);
 
-    int startText = 0;
+    int startText = 0; //diem khoi dau cua Text match voi Pattern
     int i; //bien chay tren text
-    int j = l; //bien chay tren pattern
+    int j = l + 1; //bien chay tren pattern
 
-    while (++comparisionCount && startText <= n - m)
+    if (memcmp(T, T + p, l + 1))
     {
-        i = startText + l;
+        p = MAX(l + 1, m - l - 1) + 1;
 
-        while (++comparisionCount && j < m && ++comparisionCount && T[i] == P[j])
+        while (++comparisionCount && startText <= n - m)
         {
-            i++;
-            j++;
-        }
+            i = startText + l + 1;
 
-        if (++comparisionCount && j >= m)
-        {
-            i = startText + l;
-            j = l;
-
-            while (++comparisionCount && i - startText >= 0 && ++comparisionCount && T[i] == P[j])
+            while (++comparisionCount && j < m && ++comparisionCount && T[i] == P[j])
             {
-                i--;
-                j--;
+                i++;
+                j++;
             }
 
-            if (++comparisionCount && i - startText < 0)
+            if (++comparisionCount && j >= m)
             {
-                fprintf(fp1, "%d ", startText);
+                i = startText + l;
+                j = l;
+
+                while (++comparisionCount && i - startText >= 0 && ++comparisionCount && T[i] == P[j])
+                {
+                    i--;
+                    j--;
+                }
+
+                if (++comparisionCount && i - startText < 0)
+                {
+                    // fprintf(fp1, "%d ", startText);
+                    fprintf(fp1, "%d %d\n", startText, startText + m - 1 );
+                }
+
+                startText += p;
+            }
+            else
+            {
+                startText += j - l + 1;
             }
 
-            startText += p;
+            j = l + 1;
         }
-        else
-        {
-            startText += j - l + 1;
-        }
+    }
+    else
+    {
+        int memory = -1;
 
-        j = l;
+        while (++comparisionCount && startText <= n - m)
+        {
+            i = startText + MAX(l, memory) + 1;
+
+            while (++comparisionCount && j < m && ++comparisionCount && T[i] == P[j])
+            {
+                i++;
+                j++;
+            }
+
+            if (++comparisionCount && j >= m)
+            {
+                i = startText + l;
+                j = l;
+
+                while (++comparisionCount && i > startText + memory && ++comparisionCount && T[i] == P[j])
+                {
+                    i--;
+                    j--;
+                }
+
+                if (++comparisionCount && i <= startText + memory)
+                {
+                    // fprintf(fp1, "%d ", startText);
+                    fprintf(fp1, "%d %d\n", startText, startText + m - 1 );
+                }
+
+                startText += p;
+                memory = m - p - 1;
+            }
+            else
+            {
+                startText += j - l + 1;
+                memory = -1;
+            }
+
+            j = l + 1;
+        }
     }
 
-    printf("\n");
+    fprintf(fp1, "\n");
 
     return comparisionCount;
 }
@@ -150,22 +199,26 @@ void TwoWayAlgorithm(char *inputFile, char *outputFile, int outputInfo)
     }
     else
     {
-        char T[500001];
+        char T[1000001];
         char P[51];
 
         fgets(P, 51, fp);
+        P[strcspn(P, "\n")] = '\0';
+
         fscanf(fp, "\n");
+
         fgets(T, 500001, fp);
+        T[strcspn(T, "\n")] = '\0';
 
         if (outputInfo == 0)
         {
-            clock_t start, end;
-
-            start = clock();
+            auto start = std::chrono::high_resolution_clock::now();   // Start measuring time 
             twoWayMatch(T, P, fp1);
-            end = clock();
+            auto end = std::chrono::high_resolution_clock::now();// Stop measuring time
+	        double time = double(std::chrono::duration_cast <std::chrono::nanoseconds> (end - start).count()) / 1e6;
 
-            printf("Time: %f\n", double (end - start) / CLOCKS_PER_SEC);
+
+            printf("Time: %f\n", time);
         }
         else if (outputInfo == 1)
         {
@@ -174,13 +227,13 @@ void TwoWayAlgorithm(char *inputFile, char *outputFile, int outputInfo)
         else if (outputInfo == 2)
         {
             int cmp;
-            clock_t start, end;
 
-            start = clock();
-            cmp = twoWayMatch(T, P, fp1);
-            end = clock();
+            auto start = std::chrono::high_resolution_clock::now();   // Start measuring time 
+            twoWayMatch(T, P, fp1);
+            auto end = std::chrono::high_resolution_clock::now();// Stop measuring time
+	        double time = double(std::chrono::duration_cast <std::chrono::nanoseconds> (end - start).count()) / 1e6;
 
-            printf("Time: %f\n", double (end - start) / CLOCKS_PER_SEC);
+            printf("Time: %f\n", time);
             printf("Comparision: %d\n", cmp);
         }
 
@@ -188,3 +241,4 @@ void TwoWayAlgorithm(char *inputFile, char *outputFile, int outputInfo)
         fclose(fp1);
     }
 }
+

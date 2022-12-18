@@ -44,6 +44,11 @@ void Command(char* algorithm, char* input_path, char* output_path, char* output_
         BoyerMooreAlgorithm(input_path, output_path, output_info_code);
     }
     else if(strcmp(algorithm, "-tw") == 0){
+        cout << "Algorithm: Two Way Algorithm" << endl;
+        cout << "Input path: " << input_path << endl;
+        cout << "Output Path: " << output_path << endl;
         TwoWayAlgorithm(input_path, output_path, output_info_code);
+    }else{
+        cout << "INVALID ALGORITHM" << endl;
     }
 }

@@ -73,9 +73,7 @@ void RabinKarpAlgorithm(char* input_path, char* output_path, int output_info){
         }
     }
 
-    auto end = std::chrono::high_resolution_clock::now();// Stop measuring time
-	double time = double(std::chrono::duration_cast <std::chrono::nanoseconds> (end - start).count()) / 1e6;
-
+    
     fin.close();
 
     std::ofstream fout (output_path);
@@ -85,6 +83,10 @@ void RabinKarpAlgorithm(char* input_path, char* output_path, int output_info){
     }
 
     fout.close();
+
+    auto end = std::chrono::high_resolution_clock::now();// Stop measuring time
+	double time = double(std::chrono::duration_cast <std::chrono::nanoseconds> (end - start).count()) / 1e6;
+
         
     if(output_info == 0){
         std::cout << "Time: " << time << std::endl;
